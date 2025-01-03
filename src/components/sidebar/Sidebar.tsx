@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
 import { ChevronDown, Video, Film, Scissors, Clock, Calendar, Users, HardDrive, Settings, FileVideo, Home, LayoutDashboard } from 'lucide-react';
 
-export function Sidebar({ onPageChange }) {
-  const [activeItem, setActiveItem] = useState('');
+interface SidebarProps {
+  onPageChange: (page: 'dashboard' | 'workflow') => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ onPageChange }) => {
+  const [activeItem, setActiveItem] = useState('dashboard');
   const [sectionsOpen, setSectionsOpen] = useState({
     home: true,
     production: true,
     management: true
   });
 
-  const handleItemClick = (text) => {
+  const handleItemClick = (text: string) => {
     setActiveItem(text);
-    onPageChange(text);
+    if (text === 'Dashboard') {
+      onPageChange('dashboard');
+    } else if (text === 'Workflow') {
+      onPageChange('workflow');
+    }
   };
 
   const toggleSection = (section) => {
@@ -22,7 +30,8 @@ export function Sidebar({ onPageChange }) {
   };
 
   const homeSection = [
-    { icon: LayoutDashboard, text: 'Dashboard', count: 1 }
+    { icon: LayoutDashboard, text: 'Dashboard', count: 1 },
+    { icon: Video, text: 'Workflow', count: 1 }
   ];
 
   const productionTasks = [
@@ -132,6 +141,6 @@ export function Sidebar({ onPageChange }) {
       </div>
     </div>
   );
-}
+};
 
 export default Sidebar;

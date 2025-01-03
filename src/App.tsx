@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from './components/layout/Header';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { WorkflowEditor } from './components/workflow/WorkflowEditor';
+import { Dashboard } from './components/dashboard/Dashboard';
 import { Stage } from './types';
 
+type Page = 'dashboard' | 'workflow';
+
 function App() {
+  const [currentPage, setCurrentPage] = useState<Page>('dashboard');
+  
   const stages: Stage[] = [
     {
       id: '1',
@@ -71,12 +76,20 @@ function App() {
     }
   ];
 
+  const handlePageChange = (page: Page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="h-screen flex flex-col bg-gray-900 text-white">
       <Header />
       <div className="flex-1 flex overflow-hidden">
-        <Sidebar />
-        <WorkflowEditor stages={stages} />
+        <Sidebar onPageChange={handlePageChange} />
+        {currentPage === 'dashboard' ? (
+          <Dashboard />
+        ) : (
+          <WorkflowEditor stages={stages} />
+        )}
       </div>
     </div>
   );
