@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { ChevronDown, Video, Film, Scissors, Clock, Calendar, Users, HardDrive, Settings, FileVideo } from 'lucide-react';
+import { ChevronDown, Video, Film, Scissors, Clock, Calendar, Users, HardDrive, Settings, FileVideo, Home, LayoutDashboard } from 'lucide-react';
 
-export function Sidebar() {
+export function Sidebar({ onPageChange }) {
   const [activeItem, setActiveItem] = useState('');
   const [sectionsOpen, setSectionsOpen] = useState({
+    home: true,
     production: true,
     management: true
   });
+
+  const handleItemClick = (text) => {
+    setActiveItem(text);
+    onPageChange(text);
+  };
 
   const toggleSection = (section) => {
     setSectionsOpen(prev => ({
@@ -14,6 +20,10 @@ export function Sidebar() {
       [section]: !prev[section]
     }));
   };
+
+  const homeSection = [
+    { icon: LayoutDashboard, text: 'Dashboard', count: 1 }
+  ];
 
   const productionTasks = [
     { icon: Video, text: 'Raw Footage', count: 12 },
@@ -35,6 +45,37 @@ export function Sidebar() {
       <div className="space-y-4">
         <div>
           <button 
+            onClick={() => toggleSection('home')}
+            className="w-full flex items-center justify-between text-gray-300 mb-2 hover:text-white"
+          >
+            <div className="flex items-center gap-2">
+              <Home size={16} />
+              <span className="text-sm font-medium">Home</span>
+            </div>
+            <ChevronDown size={16} className={`transform transition-transform ${!sectionsOpen.home ? '-rotate-90' : ''}`} />
+          </button>
+          {sectionsOpen.home && (
+            <div className="space-y-1">
+              {homeSection.map((item) => (
+                <button
+                  key={item.text}
+                  onClick={() => handleItemClick(item.text)}
+                  className={`w-full flex items-center justify-between p-2 rounded text-gray-400 hover:bg-gray-800 
+                    ${activeItem === item.text ? 'bg-gray-800 text-white' : ''}`}
+                >
+                  <div className="flex items-center gap-2">
+                    <item.icon size={16} />
+                    <span className="text-sm">{item.text}</span>
+                  </div>
+                  <span className="text-xs bg-gray-800 px-1.5 py-0.5 rounded">{item.count}</span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div>
+          <button 
             onClick={() => toggleSection('production')}
             className="w-full flex items-center justify-between text-gray-300 mb-2 hover:text-white"
           >
@@ -46,7 +87,7 @@ export function Sidebar() {
               {productionTasks.map((item) => (
                 <button
                   key={item.text}
-                  onClick={() => setActiveItem(item.text)}
+                  onClick={() => handleItemClick(item.text)}
                   className={`w-full flex items-center justify-between p-2 rounded text-gray-400 hover:bg-gray-800 
                     ${activeItem === item.text ? 'bg-gray-800 text-white' : ''}`}
                 >
@@ -74,7 +115,7 @@ export function Sidebar() {
               {projectManagement.map((item) => (
                 <button
                   key={item.text}
-                  onClick={() => setActiveItem(item.text)}
+                  onClick={() => handleItemClick(item.text)}
                   className={`w-full flex items-center justify-between p-2 rounded text-gray-400 hover:bg-gray-800
                     ${activeItem === item.text ? 'bg-gray-800 text-white' : ''}`}
                 >
