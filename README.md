@@ -1,7 +1,7 @@
 
 # Post-Production Workflow Manager
 
-<img width="1470" alt="Screenshot 2025-01-04 at 7 08 17 PM" src="https://github.com/user-attachments/assets/8480e69c-4a16-4a71-8b3a-5291eb0743ed" />
+<img width="1467" alt="Screenshot 2025-01-05 at 2 02 48 AM" src="https://github.com/user-attachments/assets/8d700a4d-5198-4f58-9bae-b491c53eb877" />
 
 
 ## Project Description
