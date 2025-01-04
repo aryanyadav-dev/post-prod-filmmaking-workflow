@@ -11,10 +11,16 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
-
+import { motion } from "framer-motion"; 
 const Card = ({ children, className }) => (
-  <div className={`rounded-lg shadow-md p-4 w-full ${className}`}>{children}</div>
+  <motion.div
+    className={`rounded-lg shadow-md p-4 w-full ${className}`}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+    {children}
+  </motion.div>
 );
 
 const CardHeader = ({ children, className }) => (
@@ -48,7 +54,14 @@ const TableHeader = ({ children }) => (
 );
 
 const TableRow = ({ children, className }) => (
-  <tr className={className}>{children}</tr>
+  <motion.tr
+    className={className}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+    {children}
+  </motion.tr>
 );
 
 const TableHead = ({ children, className }) => (
@@ -67,13 +80,15 @@ const TableCell = ({ children, className }) => (
 
 const Progress = ({ value, className, indicatorClassName }) => (
   <div className={`w-full bg-gray-700 rounded ${className}`}>
-    <div
+    <motion.div
       className={`h-2 rounded ${indicatorClassName}`}
       style={{ width: `${value}%` }}
-    ></div>
+      initial={{ width: 0 }}
+      animate={{ width: `${value}%` }}
+      transition={{ duration: 1 }}
+    ></motion.div>
   </div>
 );
-
 
 const ScrollableContainer = ({ children }) => (
   <div className="h-[calc(100vh-80px)] overflow-y-auto w-full custom-scrollbar">
@@ -82,27 +97,27 @@ const ScrollableContainer = ({ children }) => (
         scrollbar-width: thin;
         scrollbar-color: #4B5563 #1F2937;
       }
-      
+
       .custom-scrollbar::-webkit-scrollbar {
         width: 12px;
       }
-      
+
       .custom-scrollbar::-webkit-scrollbar-track {
         background: #1F2937;
         border-radius: 6px;
         margin: 2px;
       }
-      
+
       .custom-scrollbar::-webkit-scrollbar-thumb {
         background: #4B5563;
         border-radius: 6px;
         border: 3px solid #1F2937;
       }
-      
+
       .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: #6B7280;
       }
-      
+
       .custom-scrollbar::-webkit-scrollbar-corner {
         background: transparent;
       }
@@ -110,8 +125,6 @@ const ScrollableContainer = ({ children }) => (
     {children}
   </div>
 );
-
-
 
 const progressData = [
   { week: "Week 1", completed: 65, new: 72 },
@@ -199,7 +212,13 @@ export const Dashboard = () => {
                     trendColor: "text-green-500",
                   },
                 ].map((stat, idx) => (
-                  <div key={idx} className="bg-gray-800 p-6 rounded-lg w-full">
+                  <motion.div
+                    key={idx}
+                    className="bg-gray-800 p-6 rounded-lg w-full"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <div className="flex justify-between items-center mb-2">
                       <h3 className="text-sm font-medium text-gray-400">
                         {stat.title}
@@ -210,7 +229,7 @@ export const Dashboard = () => {
                       {stat.value}
                     </p>
                     <p className={`text-sm ${stat.trendColor}`}>{stat.trend}</p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
@@ -269,7 +288,12 @@ export const Dashboard = () => {
                   </h2>
                   <div className="space-y-4">
                     {resources.map((resource, idx) => (
-                      <div key={idx}>
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5 }}
+                      >
                         <div className="flex justify-between mb-2">
                           <span className="text-sm text-gray-400">
                             {resource.name}
@@ -282,7 +306,7 @@ export const Dashboard = () => {
                           value={resource.percentage}
                           indicatorClassName="bg-blue-500"
                         />
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
