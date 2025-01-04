@@ -3,13 +3,14 @@ import { Header } from './components/layout/Header';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { WorkflowEditor } from './components/workflow/WorkflowEditor';
 import { Dashboard } from './components/dashboard/Dashboard';
+import { Team } from './components/team/Team';
 import { Stage } from './types';
 
-type Page = 'dashboard' | 'workflow';
+type Page = 'dashboard' | 'workflow' | 'team';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('dashboard');
-  
+
   const stages: Stage[] = [
     {
       id: '1',
@@ -87,8 +88,10 @@ function App() {
         <Sidebar onPageChange={handlePageChange} />
         {currentPage === 'dashboard' ? (
           <Dashboard />
-        ) : (
+        ) : currentPage === 'workflow' ? (
           <WorkflowEditor stages={stages} />
+        ) : (
+          <Team />
         )}
       </div>
     </div>

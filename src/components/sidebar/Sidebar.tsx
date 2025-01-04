@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDown, Video, Film, Scissors, Clock, Calendar, Users, HardDrive, Settings, FileVideo, Home, LayoutDashboard } from 'lucide-react';
 
 interface SidebarProps {
-  onPageChange: (page: 'dashboard' | 'workflow') => void;
+  onPageChange: (page: 'dashboard' | 'workflow' | 'team') => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ onPageChange }) => {
@@ -19,6 +19,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ onPageChange }) => {
       onPageChange('dashboard');
     } else if (text === 'Workflow') {
       onPageChange('workflow');
+    } else if (text === 'Team') {
+      onPageChange('team');
     }
   };
 
@@ -45,7 +47,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onPageChange }) => {
     { icon: Calendar, text: 'Schedule', count: 1 },
     { icon: Clock, text: 'Timelines', count: 3 },
     { icon: Users, text: 'Team', count: 8 },
-    { icon: HardDrive, text: 'Assets', count: 24 },
+    { icon: HardDrive, text: 'Workspace', count: 5 },
     { icon: Settings, text: 'Settings', count: 1 }
   ];
 
