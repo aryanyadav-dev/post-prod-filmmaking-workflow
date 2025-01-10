@@ -1,8 +1,7 @@
 
 # Post-Production Workflow Manager
 
-<img width="1467" alt="Screenshot 2025-01-05 at 2 02 48 AM" src="https://github.com/user-attachments/assets/8d700a4d-5198-4f58-9bae-b491c53eb877" />
-
+![Post-Production Workflow Hub](Screenshot_2025-01-10_at_11.50.32_PM.png)
 
 ## Project Description
 The **Post-Production Workflow Manager** is a web-based application designed to streamline post-production processes such as editing schedules, file tracking, and resource allocation. The application facilitates collaboration among team members and ensures efficient task management.
@@ -56,7 +55,6 @@ The networking module enables real-time collaboration among team members, includ
 4. Run the application using: `npm run dev`
 
 ---
-
 
 ## Acknowledgements
 - **Spring Boot Documentation**
