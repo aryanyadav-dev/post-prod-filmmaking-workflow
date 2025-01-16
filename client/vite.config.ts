@@ -20,8 +20,11 @@ export default defineConfig({
     },
   },
   server: {
-    historyApiFallback: true, 
-    port: 5173, 
+    port: 3002, 
     open: true, 
+    strictPort: true, 
+    watch: {
+      usePolling: true, 
+    },
   },
 });
