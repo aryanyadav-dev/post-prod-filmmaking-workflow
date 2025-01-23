@@ -28,9 +28,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ onPageChange }) => {
   const [expanded, setExpanded] = useState(true);
 
   const handleItemClick = (text: string) => {
-    const normalizedText = text.toLowerCase().replace(' ', '-');
+    const normalizedText = text === 'Schedules' 
+      ? 'schedule' 
+      : text === 'Kanban Board'
+      ? 'team'
+      : text.toLowerCase().replace(' ', '-');
+    
     setActiveItem(normalizedText);
-    onPageChange(normalizedText);  // Pass the normalized page name
+    onPageChange(normalizedText);
   };
 
   const toggleExpand = (item: string) => {
@@ -59,15 +64,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ onPageChange }) => {
         'By priority'
       ]
     },
-    { icon: FileVideo, text: 'Screenwriting' },  // Add Screenwriting menu item
+    { icon: FileVideo, text: 'Screenwriting' },
   ];
 
   const bottomItems = [
     { icon: Bell, text: 'Notification' },
-    { 
-      icon: Settings, 
-      text: 'Settings'
-    }
+    { icon: Settings, text: 'Settings' }
   ];
 
   return (
@@ -111,7 +113,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ onPageChange }) => {
               <button
                 onClick={() => item.submenu ? toggleExpand(item.text) : handleItemClick(item.text)}
                 className={`w-full flex items-center px-4 py-2 hover:bg-gray-800 
-                  ${activeItem === item.text.toLowerCase().replace(' ', '-') ? 'bg-gray-800 text-white' : ''}`}
+                  ${activeItem === (
+                    item.text === 'Schedules' ? 'schedule' : 
+                    item.text === 'Kanban Board' ? 'team' : 
+                    item.text.toLowerCase().replace(' ', '-')
+                  ) ? 'bg-gray-800 text-white' : ''}`}
               >
                 <item.icon size={20} />
                 {expanded && (

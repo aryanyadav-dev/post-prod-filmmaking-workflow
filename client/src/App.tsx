@@ -5,9 +5,10 @@ import { WorkflowEditor } from './components/workflow/WorkflowEditor';
 import { Dashboard } from './components/dashboard/Dashboard';
 import { Team } from './components/team/team';
 import { Workspace } from './components/workspace/Workspace';
+import Schedule from './components/schedule/schedule';
 import { Stage } from './types';
 
-type Page = 'dashboard' | 'workflow' | 'team' | 'workspace' | 'kanban-board';
+type Page = 'dashboard' | 'workflow' | 'team' | 'workspace' | 'schedule';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('dashboard');
@@ -79,24 +80,20 @@ function App() {
   ];
 
   const handlePageChange = (page: Page) => {
-    // Handle the normalized page name from sidebar
-    if (page === 'kanban-board') {
-      setCurrentPage('team'); // Map kanban-board to team page
-    } else {
-      setCurrentPage(page);
-    }
+    setCurrentPage(page);
   };
 
   return (
     <div className="h-screen flex flex-col bg-gray-900 text-white">
       <Header />
       <div className="flex-1 flex overflow-hidden">
-        <Sidebar onPageChange={handlePageChange} />
+        <Sidebar onPageChange={handlePageChange} currentPage={currentPage} />
         <main className="flex-1 overflow-auto">
           {currentPage === 'dashboard' && <Dashboard />}
           {currentPage === 'workflow' && <WorkflowEditor stages={stages} />}
           {currentPage === 'team' && <Team />}
           {currentPage === 'workspace' && <Workspace />}
+          {currentPage === 'schedule' && <Schedule />}
         </main>
       </div>
     </div>
