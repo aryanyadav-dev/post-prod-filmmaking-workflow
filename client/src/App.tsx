@@ -9,9 +9,11 @@ import { useState } from "react"
     import Schedule from "./components/schedule/schedule"
     import { PreviewPage } from "./components/preview/PreviewPage"
     import Dropbox from "./components/dropbox/Dropbox"
+    import Storyboarder from "./components/storyboarder/Storyboarder"
+    import Screenwriting from "./components/screenwriting/Screenwriting"
     import type { Stage } from "./types"
 
-    type Page = "dashboard" | "workflow" | "team" | "workspace" | "schedule" | "dropbox"
+    type Page = "dashboard" | "workflow" | "team" | "workspace" | "schedule" | "dropbox" | "storyboarder" | "screenwriting"
 
     function AppContent() {
       const [currentPage, setCurrentPage] = useState<Page>("dashboard")
@@ -44,6 +46,8 @@ import { useState } from "react"
                       {currentPage === "workspace" && <Workspace />}
                       {currentPage === "schedule" && <Schedule />}
                       {currentPage === "dropbox" && <Dropbox />}
+                      {currentPage === "storyboarder" && <Storyboarder />}
+                      {currentPage === "screenwriting" && <Screenwriting />}
                     </>
                   }
                 />

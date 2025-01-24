@@ -13,7 +13,8 @@ import React, { useState } from 'react';
       LayoutDashboard,
       ChevronLast,
       LogOut,
-      Inbox
+      Inbox,
+      Film
     } from 'lucide-react';
 
     interface SidebarProps {
@@ -36,7 +37,9 @@ import React, { useState } from 'react';
             ? 'team'
             : text === 'File Dropbox'
               ? 'dropbox'
-              : text.toLowerCase().replace(' ', '-');
+              : text === 'Storyboarder'
+                ? 'storyboarder'
+                : text.toLowerCase().replace(' ', '-');
 
         setActiveItem(normalizedText);
         onPageChange(normalizedText);
@@ -70,6 +73,7 @@ import React, { useState } from 'react';
         },
         { icon: FileVideo, text: 'Screenwriting' },
         { icon: Inbox, text: 'File Dropbox' },
+        { icon: Film, text: 'Storyboarder' },
       ];
 
       const bottomItems = [
@@ -122,7 +126,8 @@ import React, { useState } from 'react';
                         item.text === 'Schedules' ? 'schedule' :
                           item.text === 'Kanban Board' ? 'team' :
                             item.text === 'File Dropbox' ? 'dropbox' :
-                              item.text.toLowerCase().replace(' ', '-')
+                              item.text === 'Storyboarder' ? 'storyboarder' :
+                                item.text.toLowerCase().replace(' ', '-')
                       ) ? 'bg-gray-800 text-white' : ''}
                       ${item.submenu ? 'justify-between' : ''}
                     `}
@@ -130,7 +135,7 @@ import React, { useState } from 'react';
                     <div className="flex items-center">
                       <item.icon size={20} />
                       {expanded && (
-                        <span className="ml-3">{item.text}</span>
+                        <span className="ml-3 text-base">{item.text}</span>
                       )}
                     </div>
                     {expanded && item.submenu && (
@@ -148,7 +153,7 @@ import React, { useState } from 'react';
                         <button
                           key={subItem}
                           onClick={() => handleItemClick(subItem)}
-                          className={`w-full text-left py-2 px-4 hover:bg-gray-800 text-sm rounded-md
+                          className={`w-full text-left py-2 px-4 hover:bg-gray-800 text-base rounded-md
                             ${activeItem === subItem.toLowerCase().replace(' ', '-') ? 'bg-gray-700 text-white' : ''}`}
                         >
                           {subItem}
@@ -164,7 +169,7 @@ import React, { useState } from 'react';
           {/* Bottom section */}
           <div className="border-t border-gray-800">
             <div className="px-2 py-2">
-              <span className="text-gray-500 text-xs px-2">SETTINGS</span>
+              {expanded && <span className="text-gray-500 text-xs px-2">SETTINGS</span>}
               {bottomItems.map((item) => (
                 <button
                   key={item.text}
@@ -172,7 +177,7 @@ import React, { useState } from 'react';
                   className="w-full flex items-center px-4 py-2 hover:bg-gray-800 rounded-md"
                 >
                   <item.icon size={20} />
-                  {expanded && <span className="ml-3">{item.text}</span>}
+                  {expanded && <span className="ml-3 text-base">{item.text}</span>}
                 </button>
               ))}
             </div>
@@ -183,7 +188,7 @@ import React, { useState } from 'react';
                   hover:bg-gray-700 transition-colors ${expanded ? '' : 'justify-center'}`}
               >
                 <LogOut size={20} />
-                {expanded && <span className="ml-3">Log Out</span>}
+                {expanded && <span className="ml-3 text-base">Log Out</span>}
               </button>
             </div>
           </div>
