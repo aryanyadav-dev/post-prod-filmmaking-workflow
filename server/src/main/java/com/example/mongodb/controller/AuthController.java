@@ -1,26 +1,39 @@
 package com.example.mongodb.controller;
 
-import org.springframework.http.HttpStatus;
+import com.example.mongodb.dto.LoginRequest;
+import com.example.mongodb.service.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.mongodb.service.AuthUserDetailsService;
 
 @RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
-    // Login endpoint: With session-based auth, Spring Security manages login automatically
-    @GetMapping("/api/auth/login-success") // In case you want success feedback.
-    public ResponseEntity<String> loginSuccess(Authentication authentication) {
-        if (authentication != null && authentication.isAuthenticated()) {
-            return ResponseEntity.ok("Login successful for user: " + authentication.getName());
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
-    }
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
+    private final AuthUserDetailsService userDetailsService;
 
-    // Logout success endpoint (optional)
-    @GetMapping("/api/auth/logout-success")
-    public ResponseEntity<String> logoutSuccess() {
-        return ResponseEntity.ok("Logout successful");
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+        String token = jwtService.generateToken(userDetails);
+
+        return ResponseEntity.ok(token);
     }
 }

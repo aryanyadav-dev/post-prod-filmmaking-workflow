@@ -21,3 +21,14 @@ export interface Stage {
   status: 'active' | 'inactive';
   tasks: Task[];
 }
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+}
+
+export interface AuthUser {
+  username: string;
+  password: string;
+  active?: true;
+}
