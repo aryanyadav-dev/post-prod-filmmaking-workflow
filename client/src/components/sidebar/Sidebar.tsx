@@ -83,7 +83,7 @@ import React, { useState } from 'react';
 
       return (
         <div className={`relative flex flex-col h-screen bg-gray-900 text-gray-400 transition-all duration-300 rounded-r-lg
-          ${expanded ? 'w-60' : 'w-16'}`}>
+          ${expanded ? 'w-56' : 'w-16'}`}>
           {/* Collapse Button */}
           <button
             onClick={toggleSidebar}

@@ -10,7 +10,7 @@ import { useState } from "react"
     import { PreviewPage } from "./components/preview/PreviewPage"
     import Dropbox from "./components/dropbox/Dropbox"
     import Storyboarder from "./components/storyboarder/Storyboarder"
-    import Screenwriting from "./components/screenwriting/Screenwriting"
+    import Screenwriting from "./components/screenwriting/screenwriting"
     import type { Stage } from "./types"
 
     type Page = "dashboard" | "workflow" | "team" | "workspace" | "schedule" | "dropbox" | "storyboarder" | "screenwriting"
