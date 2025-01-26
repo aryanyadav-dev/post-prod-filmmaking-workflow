@@ -15,10 +15,10 @@ import Storyboarder from '../components/storyboarder/Storyboarder';
 import Screenwriting from '../components/screenwriting/screenwriting';
 import { useState } from 'react';
 import { Stage } from '../types';
+import  Notes  from '../components/notes/notes';
 
-type Page = 'dashboard' | 'workflow' | 'team' | 'workspace' | 'schedule' | 'dropbox' | 'storyboarder' | 'screenwriting';
+type Page = 'dashboard' | 'workflow' | 'team' | 'workspace' | 'schedule' | 'dropbox' | 'storyboarder' | 'screenwriting' | 'notes';
 
-// Protected Layout Component
 const ProtectedLayout = () => {
     const { isAuthenticated } = useAuth();
     const [currentPage, setCurrentPage] = useState<Page>('dashboard');
@@ -51,7 +51,6 @@ const ProtectedLayout = () => {
         setCurrentPage(page);
     };
 
-    // If not authenticated, redirect to login
     if (!isAuthenticated) {
         return <Navigate to="/login" replace />;
     }
@@ -70,6 +69,7 @@ const ProtectedLayout = () => {
                     {currentPage === 'dropbox' && <Dropbox />}
                     {currentPage === 'storyboarder' && <Storyboarder />}
                     {currentPage === 'screenwriting' && <Screenwriting />}
+                    {currentPage === 'notes' && <Notes />}
                 </main>
             </div>
         </div>
@@ -81,14 +81,10 @@ export const Router = () => {
 
     return (
         <Routes>
-            {/* Default Route */}
             <Route path="/" element={<Navigate to="/register" replace />} />
-
-            {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
-            {/* Protected Routes */}
             {isAuthenticated ? (
                 <>
                     <Route path="/dashboard" element={<ProtectedLayout />} />
@@ -99,6 +95,7 @@ export const Router = () => {
                     <Route path="/dropbox" element={<ProtectedLayout />} />
                     <Route path="/storyboarder" element={<ProtectedLayout />} />
                     <Route path="/screenwriting" element={<ProtectedLayout />} />
+                    <Route path="/notes" element={<ProtectedLayout />} />
                     <Route path="/preview" element={<PreviewPage />} />
                 </>
             ) : (

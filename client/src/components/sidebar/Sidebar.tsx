@@ -14,7 +14,8 @@ import {
   ChevronLast,
   LogOut,
   Inbox,
-  Film
+  Film,
+  MessageCircle
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -39,7 +40,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ onPageChange, currentPage }) =
                 ? 'dropbox'
                 : text === 'Storyboarder'
                     ? 'storyboarder'
-                    : text.toLowerCase().replace(' ', '-');
+                    : text === 'Project Chatroom'
+                        ? 'chatroom'
+                        : text.toLowerCase().replace(' ', '-');
 
     setActiveItem(normalizedText);
     onPageChange(normalizedText);
@@ -74,6 +77,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onPageChange, currentPage }) =
     { icon: FileVideo, text: 'Screenwriting' },
     { icon: Inbox, text: 'File Dropbox' },
     { icon: Film, text: 'Storyboarder' },
+    { icon: MessageCircle, text: 'Project Chatroom' },
   ];
 
   const bottomItems = [
@@ -127,7 +131,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ onPageChange, currentPage }) =
                               item.text === 'Kanban Board' ? 'team' :
                                   item.text === 'File Dropbox' ? 'dropbox' :
                                       item.text === 'Storyboarder' ? 'storyboarder' :
-                                          item.text.toLowerCase().replace(' ', '-')
+                                          item.text === 'Project Chatroom' ? 'chatroom' :
+                                              item.text.toLowerCase().replace(' ', '-')
                       ) ? 'bg-gray-800 text-white' : ''}
                       ${item.submenu ? 'justify-between' : ''}
                     `}
