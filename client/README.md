@@ -1,7 +1,7 @@
 
 # Post-Production Workflow Manager
 
-<img width="1470" alt="Screenshot 2025-01-10 at 11 50 32 PM" src="https://github.com/user-attachments/assets/f20c90ca-e467-4171-9d43-65b92c30226d" />
+<img width="1467" alt="Screenshot 2025-01-05 at 2 02 48 AM" src="https://github.com/user-attachments/assets/8d700a4d-5198-4f58-9bae-b491c53eb877" />
 
 
 ## Project Description
@@ -56,6 +56,7 @@ The networking module enables real-time collaboration among team members, includ
 4. Run the application using: `npm run dev`
 
 ---
+
 
 ## Acknowledgements
 - **Spring Boot Documentation**
