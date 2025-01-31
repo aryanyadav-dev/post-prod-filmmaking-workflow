@@ -1,6 +1,6 @@
 package com.example.mongodb.controller;
 
-import com.example.mongodb.dto.LoginRequest;
+import com.example.mongodb.DTO.LoginRequest;
 import com.example.mongodb.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

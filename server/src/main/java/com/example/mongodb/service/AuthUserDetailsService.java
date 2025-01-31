@@ -27,6 +27,7 @@ public class AuthUserDetailsService implements UserDetailsService {
                     .username(authUser.get().getUsername())
                     .password(authUser.get().getPassword())
                     .disabled(!authUser.get().isActive())
+                    .roles("USER")  // Add default role
                     .build();
         }
     }

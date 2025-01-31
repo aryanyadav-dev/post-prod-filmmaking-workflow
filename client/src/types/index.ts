@@ -32,3 +32,16 @@ export interface AuthUser {
   password: string;
   active?: true;
 }
+
+export interface TeamMember {
+  name: string;
+  count: number;
+}
+
+export interface Project {
+  id?: string;
+  name: string;
+  description: string;
+  projectType: string;
+  teamMembers: TeamMember[];
+}

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect, DragEvent } from 'react';
-import { Monitor, Image, Wand2, Music, ViewIcon as Index, Volume2, Download, Maximize2, Settings, ChevronLeft, ChevronRight, Play, Pause, SkipBack, SkipForward, RotateCcw, Search, Upload, X } from 'lucide-react';
+import { Monitor, Image, Wand2, Music, Volume2, Download, Maximize2, Settings, ChevronLeft, ChevronRight, Play, Pause, SkipBack, SkipForward, RotateCcw, Search, Upload, X, View } from 'lucide-react';
 
 interface MediaItem {
   id: string;
